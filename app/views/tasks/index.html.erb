@@ -1,8 +1,32 @@
-<h1>My to-do list</h1>
-<ul>
-  <% @tasks.each do |task| %>
-  <li><%= link_to task.title, task_path(task) %></li>
-  <% end %>
-</ul>
+<section class="vh-100" style="background-color: #3da2c3;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-8 col-xl-6">
+        <div class="card rounded-3">
+          <div class="card-body p-4">
 
-<%= link_to "Add a new task", tasks_new_path %>
+            <p class="mb-2"><span class="h2 me-2">My to-do list</p>
+
+            <ul class="list-group rounded-0">
+              <% @tasks.each do |task| %>
+                <li class="list-group-item border-0 d-flex align-items-center ps-0">
+                <div class="mx-2">
+                  <%# <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." checked /> %>
+                  <%= form_with model: task do |f| %>
+                  <%= f.check_box :completed, onchange: f.submit(); %>
+                  <% end %>
+                </div>
+                <div>
+                  <%= link_to task.title, task_path(task), :class => "text-black text-decoration-none" %>
+                  <%= link_to "🗑", task_path(task), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+                </div>
+                </li>
+              <% end %>
+            </ul>
+              <%= link_to "Add a new task", new_task_path, :class => "btn btn-danger my-2" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

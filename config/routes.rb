@@ -5,9 +5,8 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-
   # *afficher* le formulaire de tâche (CREATE)
-  get "tasks/new", to: "tasks#new"
+  get "tasks/new", to: "tasks#new", as: :new_task
   # *envoyer data* pour créer la nouvelle tâche (CREATE)
   post "tasks", to: "tasks#create"
 
@@ -15,6 +14,7 @@ Rails.application.routes.draw do
   get "tasks/:id/edit", to: "tasks#edit", as: :edit_task
   # *modifier data* pour éditer la tâche (EDIT)
   patch "tasks/:id", to: "tasks#update"
+  # patch "tasks", to: "tasks#index"
 
   # *supprimer data* pour supprimer une tâche (DELETE)
   delete "tasks/:id", to: "tasks#destroy"
@@ -23,4 +23,6 @@ Rails.application.routes.draw do
   get "tasks", to: "tasks#index"
   # *afficher* une tâche (READ)
   get "tasks/:id", to: "tasks#show", as: :task
+
+  # resources :tasks
 end

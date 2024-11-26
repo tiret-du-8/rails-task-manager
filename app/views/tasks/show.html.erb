@@ -1,6 +1,9 @@
 <h1><%= @task.title %></h1>
 <p><%= @task.details %></p>
+<p><%= form_with model: @task do |f| %>
+  <%= f.check_box :completed, onchange: f.submit(); %>
+<% end %> <%= @completed %></p>
 
 <%= link_to "Back to list", tasks_path %>
 <%= link_to "Edit this task", edit_task_path(@task) %>
-<%= link_to "Delete task", task_path(@task), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+<%# link_to "Delete task", task_path(@task), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
